@@ -1,0 +1,96 @@
+{% extends "base.html" %}
+
+{% block title %}Chat Rooms - FlaskChat{% endblock %}
+
+{% block content %}
+<div class="rooms-container">
+    <!-- Header Section -->
+    <div class="page-header">
+        <h1 class="page-title">
+            <i class="fas fa-door-open me-3"></i>
+            Chat Rooms
+        </h1>
+        <p class="page-subtitle">Choose a room to join or create your own</p>
+    </div>
+
+    <div class="row">
+        <!-- Rooms Grid -->
+        <div class="col-lg-8">
+            {% if rooms %}
+            <div class="rooms-grid">
+                {% for room in rooms %}
+                <div class="room-card glass-effect">
+                    <div class="room-header">
+                        <div class="room-icon">
+                            <i class="fas fa-hashtag"></i>
+                        </div>
+                        <h5 class="room-name">{{ room.name }}</h5>
+                    </div>
+                    
+                    <div class="room-meta">
+                        <span class="created-date">
+                            <i class="fas fa-calendar-alt me-1"></i>
+                            {{ room.created_at.strftime('%b %d, %Y') }}
+                        </span>
+                    </div>
+                    
+                    <div class="room-actions">
+                        <a href="{{ url_for('chat', room_id=room.id) }}" class="btn modern-btn-primary">
+                            <i class="fas fa-sign-in-alt me-2"></i>
+                            Join Room
+                        </a>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            {% else %}
+            <div class="empty-state glass-effect">
+                <div class="empty-icon">
+                    <i class="fas fa-comments-dollar"></i>
+                </div>
+                <h3>No rooms yet</h3>
+                <p>Be the first to create a chat room and start the conversation!</p>
+            </div>
+            {% endif %}
+        </div>
+        
+        <!-- Create Room Sidebar -->
+        <div class="col-lg-4 ">
+            <div class="create-room-card glass-effect sticky-top p-3">
+                <div class="card-header">
+                    <h5 class="mb-0">
+                        <i class="fas fa-plus-circle me-2"></i>
+                        Create New Room
+                    </h5>
+                </div>
+                
+                <div class="card-body">
+                    <form method="POST" action="{{ url_for('create_room') }}" class="modern-form">
+                        <div class="form-group">
+                            <label for="room_name" class="form-label">Room Name</label>
+                            <div class="input-wrapper">
+                                <input type="text" class="form-control modern-input" id="room_name" 
+                                       name="room_name" placeholder="e.g., Design Team, Random Chat..." 
+                                       required maxlength="50" autocomplete="off">
+                                <div class="input-focus-border"></div>
+                            </div>
+                        </div>
+                        
+                        <button type="submit" class="btn modern-btn-success w-100">
+                            <i class="fas fa-rocket me-2"></i>
+                            Create Room
+                        </button>
+                    </form>
+                </div>
+                
+                <div class="card-footer">
+                    <small class="text-muted">
+                        <i class="fas fa-lightbulb me-1"></i>
+                        Tip: Choose a descriptive name for your room
+                    </small>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

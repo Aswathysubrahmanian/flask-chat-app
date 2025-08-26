@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+
+{% block title %}Welcome - FlaskChat{% endblock %}
+
+{% block content %}
+<div class="landing-container p-3">
+    <div class="row justify-content-center align-items-center min-vh-80 p-3">
+        <div class="col-lg-5 col-md-7 ">
+            <!-- Welcome Card -->
+            <div class="modern-card glass-effect p-3">
+                <div class="card-header text-center">
+                    <div class="welcome-icon">
+                        <i class="fas fa-rocket"></i>
+                    </div>
+                    <h2 class="welcome-title">Welcome to FlaskChat</h2>
+                    <p class="welcome-subtitle">Connect, chat, and collaborate in real-time</p>
+                </div>
+                
+                <div class="card-body">
+                    <form method="POST" action="{{ url_for('set_username') }}" class="modern-form">
+                        <div class="form-group">
+                            <label for="username" class="form-label">
+                                <i class="fas fa-user me-2"></i>Choose your display name
+                            </label>
+                            <div class="input-wrapper">
+                                <input type="text" class="form-control modern-input" id="username" 
+                                       name="username" placeholder="Enter your display name..." 
+                                       required maxlength="20" autocomplete="off">
+                                <div class="input-focus-border"></div>
+                            </div>
+                        </div>
+                        
+                        <button type="submit" class="btn modern-btn-primary w-100">
+                            <span>Start Chatting</span>
+                            <i class="fas fa-arrow-right ms-2"></i>
+                        </button>
+                    </form>
+                </div>
+                
+                <div class="card-footer text-center">
+                    <div class="features-list">
+                        <span class="feature-item">
+                            <i class="fas fa-bolt text-warning"></i> Real-time
+                        </span>
+                        <span class="feature-item">
+                            <i class="fas fa-users text-info"></i> Multi-room
+                        </span>
+                        <span class="feature-item">
+                            <i class="fas fa-mobile-alt text-success"></i> Responsive
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

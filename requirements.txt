@@ -1,0 +1,11 @@
+Flask
+
+Flask-SocketIO
+
+Flask-SQLAlchemy
+
+Flask-Migrate
+
+Flask-Login
+
+eventlet
